@@ -1,0 +1,4 @@
+bin/v2ctl
+bin/v2ray
+bin/log/*.log
+bin/db/*
