@@ -1,4 +1,4 @@
-module v2ray.com/core
+module github.com/nilhost/overnet
 
 go 1.15
 
