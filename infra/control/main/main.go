@@ -18,7 +18,7 @@ func getCommandName() string {
 }
 
 func main() {
-	// let the v2ctl prints log at stderr
+	// let the overctl prints log at stderr
 	commlog.RegisterHandler(commlog.NewLogger(commlog.CreateStderrLogWriter()))
 	name := getCommandName()
 	cmd := control.GetCommand(name)
@@ -26,7 +26,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Unknown command:", name)
 		fmt.Fprintln(os.Stderr)
 
-		fmt.Println("v2ctl <command>")
+		fmt.Println("overctl <command>")
 		fmt.Println("Available commands:")
 		control.PrintUsage()
 		return

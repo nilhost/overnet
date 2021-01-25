@@ -25,7 +25,7 @@ func (c *ConfigCommand) Name() string {
 func (c *ConfigCommand) Description() Description {
 	return Description{
 		Short: "merge multiple json config",
-		Usage: []string{"v2ctl config config.json c1.json c2.json <url>.json"},
+		Usage: []string{"overctl config config.json c1.json c2.json <url>.json"},
 	}
 }
 

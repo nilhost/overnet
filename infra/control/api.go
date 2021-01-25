@@ -26,7 +26,7 @@ func (c *ApiCommand) Description() Description {
 	return Description{
 		Short: "Call V2Ray API",
 		Usage: []string{
-			"v2ctl api [--server=127.0.0.1:8080] Service.Method Request",
+			"overctl api [--server=127.0.0.1:8080] Service.Method Request",
 			"Call an API in an V2Ray process.",
 			"The following methods are currently supported:",
 			"\tLoggerService.RestartLogger",
@@ -34,10 +34,10 @@ func (c *ApiCommand) Description() Description {
 			"\tStatsService.QueryStats",
 			"API calls in this command have a timeout to the server of 3 seconds.",
 			"Examples:",
-			"v2ctl api --server=127.0.0.1:8080 LoggerService.RestartLogger '' ",
-			"v2ctl api --server=127.0.0.1:8080 StatsService.QueryStats 'pattern: \"\" reset: false'",
-			"v2ctl api --server=127.0.0.1:8080 StatsService.GetStats 'name: \"inbound>>>statin>>>traffic>>>downlink\" reset: false'",
-			"v2ctl api --server=127.0.0.1:8080 StatsService.GetSysStats ''",
+			"overctl api --server=127.0.0.1:8080 LoggerService.RestartLogger '' ",
+			"overctl api --server=127.0.0.1:8080 StatsService.QueryStats 'pattern: \"\" reset: false'",
+			"overctl api --server=127.0.0.1:8080 StatsService.GetStats 'name: \"inbound>>>statin>>>traffic>>>downlink\" reset: false'",
+			"overctl api --server=127.0.0.1:8080 StatsService.GetSysStats ''",
 		},
 	}
 }

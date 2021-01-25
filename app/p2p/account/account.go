@@ -9,13 +9,13 @@ import (
 	"fmt"
 
 	"github.com/libp2p/go-libp2p-core/crypto"
-	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/nilhost/overnet/store"
+	"github.com/syndtr/goleveldb/leveldb"
 )
 
 const DB_DIR = "./db"
 
-type SocksDB struct {
+type LevelDB struct {
 	db *store.LevelDBStore
 }
 
@@ -32,7 +32,7 @@ func GetAccount() *Account {
 
 	account, err := socksdb.QueryDefaultAccount()
 	if account != nil && err == nil {
-		fmt.Println("get default account from socksdb")
+		fmt.Println("get default account from leveldb")
 		return account
 	}
 
@@ -50,7 +50,7 @@ func GetAccount() *Account {
 	return nil
 }
 
-func OpenSocksDB(path string) (*SocksDB, error) {
+func OpenSocksDB(path string) (*LevelDB, error) {
 	if ldb, err := store.NewLevelDBStore(path); err == nil {
 		return NewSocksDB(ldb), nil
 	} else {
@@ -59,18 +59,18 @@ func OpenSocksDB(path string) (*SocksDB, error) {
 	}
 }
 
-func NewSocksDB(d *store.LevelDBStore) *SocksDB {
-	p := &SocksDB{
+func NewSocksDB(d *store.LevelDBStore) *LevelDB {
+	p := &LevelDB{
 		db: d,
 	}
 	return p
 }
 
-func (this *SocksDB) Close() {
+func (this *LevelDB) Close() {
 	this.db.Close()
 }
 
-func (this *SocksDB) InsertOrUpdateAccount(pubKey crypto.PubKey, privKey crypto.PrivKey) (error, *Account) {
+func (this *LevelDB) InsertOrUpdateAccount(pubKey crypto.PubKey, privKey crypto.PrivKey) (error, *Account) {
 	pubBytes, err := pubKey.Raw()
 	if err != nil {
 		fmt.Println("in InsertOrUpdateAccount, pubKey.Bytes() err:", err.Error())
@@ -90,11 +90,11 @@ func (this *SocksDB) InsertOrUpdateAccount(pubKey crypto.PubKey, privKey crypto.
 	return this.db.Put([]byte("default"), privBytes), info
 }
 
-func (this *SocksDB) QueryDefaultAccount() (*Account, error) {
+func (this *LevelDB) QueryDefaultAccount() (*Account, error) {
 	return this.QueryAccount("default")
 }
 
-func (this *SocksDB) QueryAccount(label string) (*Account, error) {
+func (this *LevelDB) QueryAccount(label string) (*Account, error) {
 	key := []byte(label)
 	value, err := this.db.Get(key)
 	if err != nil {
@@ -114,7 +114,7 @@ func (this *SocksDB) QueryAccount(label string) (*Account, error) {
 	return info, nil
 }
 
-func (this *SocksDB) DeleteAccount(pubKey crypto.PubKey) error {
+func (this *LevelDB) DeleteAccount(pubKey crypto.PubKey) error {
 	if rawKey, err := pubKey.Raw(); err == nil {
 		return this.db.Delete(rawKey)
 	} else {

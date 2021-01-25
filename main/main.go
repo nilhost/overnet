@@ -5,6 +5,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/nilhost/overnet/backend"
 	"io/ioutil"
 	"log"
 	"os"
@@ -160,6 +161,8 @@ func main() {
 		os.Exit(-1)
 	}
 	defer server.Close()
+
+	backend.RunService()
 
 	// Explicitly triggering GC to remove garbage from config loading.
 	runtime.GC()

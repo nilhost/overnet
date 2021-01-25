@@ -44,7 +44,7 @@ func (c *CertificateCommand) Description() Description {
 	return Description{
 		Short: "Generate TLS certificates.",
 		Usage: []string{
-			"v2ctl cert [--ca] [--domain=v2ray.com] [--expire=240h]",
+			"overctl cert [--ca] [--domain=v2ray.com] [--expire=240h]",
 			"Generate new TLS certificate",
 			"--ca The new certificate is a CA certificate",
 			"--domain Common name for the certificate",

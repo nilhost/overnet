@@ -17,7 +17,7 @@ func (c *VerifyCommand) Description() Description {
 	return Description{
 		Short: "Verify if a binary is officially signed.",
 		Usage: []string{
-			"v2ctl verify --sig=<sig-file> file...",
+			"overctl verify --sig=<sig-file> file...",
 			"Verify the file officially signed by V2Ray.",
 		},
 	}

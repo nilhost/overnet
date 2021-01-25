@@ -39,7 +39,7 @@ var (
 		"dns":         func() interface{} { return new(DnsOutboundConfig) },
 	}, "protocol", "settings")
 
-	ctllog = log.New(os.Stderr, "v2ctl> ", 0)
+	ctllog = log.New(os.Stderr, "overctl> ", 0)
 )
 
 func toProtocolList(s []string) ([]proxyman.KnownProtocols, error) {
@@ -328,6 +328,7 @@ type Config struct {
 	Stats           *StatsConfig           `json:"stats"`
 	Reverse         *ReverseConfig         `json:"reverse"`
 	P2P         	*P2PConfig             `json:"p2p"`
+	Onet         	*OnetConfig             `json:"onet"`
 }
 
 func (c *Config) findInboundTag(tag string) int {
@@ -484,6 +485,12 @@ func (c *Config) Build() (*core.Config, error) {
 		config.App = append(config.App, serial.ToTypedMessage(c.P2P.Build()))
 	} else {
 		config.App = append(config.App, serial.ToTypedMessage(DefaultP2PConfig()))
+	}
+
+	if c.Onet != nil {
+		config.App = append(config.App, serial.ToTypedMessage(c.Onet.Build()))
+	} else {
+		config.App = append(config.App, serial.ToTypedMessage(DefaultOnetConfig()))
 	}
 
 	var logConfMsg *serial.TypedMessage

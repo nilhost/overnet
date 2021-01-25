@@ -13,15 +13,15 @@ import (
 //go:generate go run github.com/nilhost/overnet/common/errors/errorgen
 
 func Run(args []string, input io.Reader) (buf.MultiBuffer, error) {
-	v2ctl := platform.GetToolLocation("v2ctl")
-	if _, err := os.Stat(v2ctl); err != nil {
+	overctl := platform.GetToolLocation("overctl")
+	if _, err := os.Stat(overctl); err != nil {
 		return nil, newError("v2ctl doesn't exist").Base(err)
 	}
 
 	var errBuffer buf.MultiBufferContainer
 	var outBuffer buf.MultiBufferContainer
 
-	cmd := exec.Command(v2ctl, args...)
+	cmd := exec.Command(overctl, args...)
 	cmd.Stderr = &errBuffer
 	cmd.Stdout = &outBuffer
 	cmd.SysProcAttr = getSysProcAttr()
@@ -30,11 +30,11 @@ func Run(args []string, input io.Reader) (buf.MultiBuffer, error) {
 	}
 
 	if err := cmd.Start(); err != nil {
-		return nil, newError("failed to start v2ctl").Base(err)
+		return nil, newError("failed to start overctl").Base(err)
 	}
 
 	if err := cmd.Wait(); err != nil {
-		msg := "failed to execute v2ctl"
+		msg := "failed to execute overctl"
 		if errBuffer.Len() > 0 {
 			msg += ": \n" + strings.TrimSpace(errBuffer.MultiBuffer.String())
 		}
@@ -43,7 +43,7 @@ func Run(args []string, input io.Reader) (buf.MultiBuffer, error) {
 
 	// log stderr, info message
 	if !errBuffer.IsEmpty() {
-		newError("<v2ctl message> \n", strings.TrimSpace(errBuffer.MultiBuffer.String())).AtInfo().WriteToLog()
+		newError("<overctl message> \n", strings.TrimSpace(errBuffer.MultiBuffer.String())).AtInfo().WriteToLog()
 	}
 
 	return outBuffer.MultiBuffer, nil

@@ -21,7 +21,7 @@ func (c *ConfigCommand) Description() control.Description {
 	return control.Description{
 		Short: "Convert config among different formats.",
 		Usage: []string{
-			"v2ctl config",
+			"overctl config",
 		},
 	}
 }

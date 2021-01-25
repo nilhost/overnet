@@ -20,7 +20,7 @@ func (c *FetchCommand) Name() string {
 func (c *FetchCommand) Description() Description {
 	return Description{
 		Short: "Fetch resources",
-		Usage: []string{"v2ctl fetch <url>"},
+		Usage: []string{"overctl fetch <url>"},
 	}
 }
 

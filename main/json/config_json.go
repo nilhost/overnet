@@ -21,7 +21,7 @@ func init() {
 			case cmdarg.Arg:
 				r, err := confloader.LoadExtConfig(v)
 				if err != nil {
-					return nil, newError("failed to execute v2ctl to convert config file.").Base(err).AtWarning()
+					return nil, newError("failed to execute overctl to convert config file.").Base(err).AtWarning()
 				}
 				return core.LoadConfig("protobuf", "", r)
 			case io.Reader:

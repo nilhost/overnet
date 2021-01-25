@@ -19,7 +19,7 @@ func (c *TlsPingCommand) Name() string {
 func (c *TlsPingCommand) Description() Description {
 	return Description{
 		Short: "Ping the domain with TLS handshake",
-		Usage: []string{"v2ctl tlsping <domain> --ip <ip>"},
+		Usage: []string{"overctl tlsping <domain> --ip <ip>"},
 	}
 }
 

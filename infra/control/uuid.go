@@ -16,7 +16,7 @@ func (c *UUIDCommand) Name() string {
 func (c *UUIDCommand) Description() Description {
 	return Description{
 		Short: "Generate new UUIDs",
-		Usage: []string{"v2ctl uuid"},
+		Usage: []string{"overctl uuid"},
 	}
 }
 

@@ -17,6 +17,7 @@ import (
 	// Other optional features.
 	_ "github.com/nilhost/overnet/app/dns"
 	_ "github.com/nilhost/overnet/app/log"
+	_ "github.com/nilhost/overnet/app/onet"
 	_ "github.com/nilhost/overnet/app/p2p"
 	_ "github.com/nilhost/overnet/app/policy"
 	_ "github.com/nilhost/overnet/app/reverse"
@@ -59,7 +60,7 @@ import (
 	_ "github.com/nilhost/overnet/transport/internet/headers/wireguard"
 
 	// JSON config support. Choose only one from the two below.
-	// The following line loads JSON from v2ctl
+	// The following line loads JSON from overctl
 	_ "github.com/nilhost/overnet/main/json"
 	// The following line loads JSON internally
 	// _ "github.com/nilhost/overnet/main/jsonem"
